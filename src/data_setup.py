@@ -18,8 +18,10 @@ data_transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
+data_root = "../Data"
+
 train_data = datasets.OxfordIIITPet(
-    root="data",
+    root=data_root,
     train=True,
     download=True,
     transform=data_transform,
@@ -27,7 +29,7 @@ train_data = datasets.OxfordIIITPet(
 )
 
 test_data = datasets.OxfordIIITPet(
-    root="data",
+    root=data_root,
     train=False,
     download=True,
     transform=data_transform,
