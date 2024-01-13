@@ -1,5 +1,5 @@
 """
-Contains any necessary utility functions for a PyTorch model.
+Contains utility functionality for a PyTorch model.
 
 Author: Alvaro Deras
 Date: January 13, 2024
