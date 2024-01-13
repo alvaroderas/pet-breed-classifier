@@ -13,11 +13,16 @@ from torch.utils.data import DataLoader
 NUM_WORKERS = os.cpu_count()
 BATCH_SIZE = 32
 
+data_transform = transforms.Compose([
+    transforms.Resize((64, 64)),
+    transforms.ToTensor()
+])
+
 train_data = datasets.OxfordIIITPet(
     root="data",
     train=True,
     download=True,
-    transform=torchvision.transforms.ToTensor(),
+    transform=data_transform,
     target_transform=None
 )
 
@@ -25,7 +30,7 @@ test_data = datasets.OxfordIIITPet(
     root="data",
     train=False,
     download=True,
-    transform=torchvision.transforms.ToTensor(),
+    transform=data_transform,
     target_transform=None
 )
 
