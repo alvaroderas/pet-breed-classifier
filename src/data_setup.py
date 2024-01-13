@@ -32,7 +32,7 @@ test_data = datasets.OxfordIIITPet(
 def setup_data(train_data: str=train_data,
                       test_data: str=test_data,
                       batch_size: int=BATCH_SIZE,
-                      num_workers=NUM_WORKERS):
+                      num_workers: int=NUM_WORKERS):
     """
     Returns a tuple of dataloaders and class names.
 
