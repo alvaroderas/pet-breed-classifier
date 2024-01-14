@@ -1,5 +1,5 @@
 """
-Contains PyTorch code to instantiate a convolutional neural network model.
+Contains PyTorch code to instantiate a waste classifier.
 
 Author: Alvaro Deras
 Date: January 13, 2024
@@ -7,22 +7,19 @@ Date: January 13, 2024
 import torch
 from torch import nn
 
-class PetCNN(nn.Module):
+class WasteClassifier(nn.Module):
     """
-    A class representing a convolutional neural network model.
+    A class representing a convolutional neural network model for classifying waste.
     """
-    def __init__(self, input_shape: int, hidden_units: int, output_shape: int) -> None:
+    def __init__(self, input_shape: int, hidden_units: int) -> None:
         """
-        Instantiates an instance of the PetCNN model.
+        Instantiates an instance of the WasteClassifier model.
 
         Parameter input_shape: the number of input channels
         Precondition: input_shape is an int
 
         Parameter hidden_units: the number of hidden units between layers
         Precondition: hidden_units is an int
-
-        Parameter output_shape:
-        Precondition: output_shape is an int
         """
         super().__init__()
         self.conv_block_1 = nn.Sequential(
@@ -57,10 +54,9 @@ class PetCNN(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(in_features=hidden_units,
-                    out_features=output_shape)
+            nn.Linear(in_features=hidden_units * 16 * 16,
+                      out_features=1)
         )
-
     def forward(self, x: torch.Tensor):
         """
         Returns the output of the model
