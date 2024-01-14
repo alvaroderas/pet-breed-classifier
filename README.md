@@ -1,2 +1,2 @@
-# pet-breed-classifier
-A convolutional neural network that classifies dogs and cats according to their breed.
+# Waste Classifier
+A convolutional neural network that classifies images based on whether they are organic or recyclable.
