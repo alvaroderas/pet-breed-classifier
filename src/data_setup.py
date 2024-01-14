@@ -22,7 +22,7 @@ data_root = "../Data"
 
 train_data = datasets.OxfordIIITPet(
     root=data_root,
-    train=True,
+    split="trainval",
     download=True,
     transform=data_transform,
     target_transform=None
@@ -30,7 +30,7 @@ train_data = datasets.OxfordIIITPet(
 
 test_data = datasets.OxfordIIITPet(
     root=data_root,
-    train=False,
+    split="test",
     download=True,
     transform=data_transform,
     target_transform=None
