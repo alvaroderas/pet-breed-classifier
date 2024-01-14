@@ -22,7 +22,6 @@ def main():
     model = model_builder.WasteClassifier(
         input_shape=3,
         hidden_units=HIDDEN_UNITS,
-        output_shape=len(class_names)
     ).to(device)
 
     loss_function = torch.nn.BCEWithLogitsLoss()
