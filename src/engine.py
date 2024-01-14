@@ -37,25 +37,28 @@ def train_step(model: torch.nn.Module,
     """
     model.train()
 
+    model.to(device)
+
     train_loss = 0
     train_acc = 0
 
     for batch, (X, y) in enumerate(dataloader):
         X = X.to(device)
+        y.view(-1).long()
         y = y.to(device)
 
-        y_pred = model(X)
+        y_logits = model(X).squeeze().to(device)
 
-        loss = loss_function(y_pred, y)
+        loss = loss_function(y_logits, y.type(torch.float32))
         train_loss += loss.item()
 
         optimizer.zero_grad()
 
         loss.backward()
-
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
 
-        y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
+        y_pred_class = torch.round(torch.sigmoid(y_logits))
         train_acc += (y_pred_class == y).sum().item()/len(y_pred)
 
     train_loss = train_loss / len(dataloader)
@@ -86,7 +89,6 @@ def test_step(model: torch.nn.Module,
     Precondition: device is a valid torch.device
     """
     model.eval()
-
     test_loss = 0
     test_acc = 0
 
@@ -95,14 +97,14 @@ def test_step(model: torch.nn.Module,
             X = X.to(device)
             y = y.to(device)
 
-            test_pred_logits = model(X)
+            test_pred_logits = model(X).squeeze()
 
-            loss = loss_function(test_pred_logits, y)
+            loss = loss_function(test_pred_logits, y.float())
             test_loss += loss.item()
 
-            test_pred_labels = test_pred_logits.argmax(dim=1)
+            test_pred_labels = torch.round(torch.sigmoid(test_pred_logits))
             test_acc += ((test_pred_labels == y).sum().item()/len(test_pred_labels))
-    
+
     test_loss = test_loss / len(dataloader)
     test_acc = test_acc / len(dataloader)
     return test_loss, test_acc
@@ -166,5 +168,5 @@ def train(model: torch.nn.Module,
         metrics["train_acc"].append(train_acc)
         metrics["test_loss"].append(test_loss)
         metrics["test_acc"].append(test_acc)
-    
+
     return metrics
