@@ -1,5 +1,5 @@
 """
-Contains functions for training and testing a PyTorch model.
+Contains functions for training and testing the Waste Classifier model.
 
 Author: Alvaro Deras
 Date: January 13, 2024
@@ -36,8 +36,6 @@ def train_step(model: torch.nn.Module,
     Precondition: device is a valid torch.device
     """
     model.train()
-
-    model.to(device)
 
     train_loss = 0
     train_acc = 0
@@ -89,6 +87,7 @@ def test_step(model: torch.nn.Module,
     Precondition: device is a valid torch.device
     """
     model.eval()
+
     test_loss = 0
     test_acc = 0
 
