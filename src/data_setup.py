@@ -13,43 +13,19 @@ from torch.utils.data import DataLoader
 NUM_WORKERS = os.cpu_count()
 BATCH_SIZE = 32
 
-data_transform = transforms.Compose([
-    transforms.Resize((64, 64)),
-    transforms.ToTensor()
-])
+data_root = "../dataset"
 
-data_root = "../Data"
 
-train_data = datasets.OxfordIIITPet(
-    root=data_root,
-    split="trainval",
-    download=True,
-    transform=data_transform,
-    target_transform=None
-)
-
-test_data = datasets.OxfordIIITPet(
-    root=data_root,
-    split="test",
-    download=True,
-    transform=data_transform,
-    target_transform=None
-)
-
-def setup_data(train_data: str=train_data,
-                      test_data: str=test_data,
-                      batch_size: int=BATCH_SIZE,
-                      num_workers: int=NUM_WORKERS):
+def setup_data(data_root: str="../dataset",
+               batch_size: int=BATCH_SIZE,
+               num_workers: int=NUM_WORKERS):
     """
     Returns a tuple of dataloaders and class names.
 
-    Takes in training and test datasets and converts them into PyTorch DataLoaders.
+    Takes in data root, creates datasets, turns them into PyTorch DataLoaders.
 
-    Parameter train_data: the training dataset
-    Precondition: train_data is an instance of torch.utils.data.Dataset
-
-    Parameter test_data: the testing dataset
-    Precondition: test_data is an instance of torch.utils.data.Dataset
+    Parameter data_root: the root directory where the dataset is located
+    Precondition: data_root is a valid path
 
     Parameter batch_size: the number of samples per batch in each DataLoader
     Precondition: batch_size is an int
@@ -57,19 +33,34 @@ def setup_data(train_data: str=train_data,
     Parameter num_workers: the number of workers per DataLoader
     Precondition: num_workers is an int
     """
+    data_transform = transforms.Compose([
+        transforms.Resize((64, 64)),
+        transforms.ToTensor(),
+    ])
+
+    train_data = datasets.ImageFolder(
+        root=os.path.join(data_root, "DATASET/TRAIN"),
+        transform=data_transform,
+    )
+
+    test_data = datasets.ImageFolder(
+        root=os.path.join(data_root, "DATASET/TEST"),
+        transform=data_transform,
+    )
+
     class_names = train_data.classes
 
     train_dataloader = DataLoader(
-        train_data,
-        batch_size=batch_size,
+        dataset=train_data,
+        batch_size=BATCH_SIZE,
         shuffle=True,
         num_workers=num_workers,
         pin_memory=True
     )
-    
+
     test_dataloader = DataLoader(
-        test_data,
-        batch_size=batch_size,
+        dataset=test_data,
+        batch_size=BATCH_SIZE,
         shuffle=False,
         num_workers=num_workers,
         pin_memory=True
