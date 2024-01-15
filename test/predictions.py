@@ -27,7 +27,7 @@ def plot_predictions(model: torch.nn.Module, device: torch.device):
             transforms.ToTensor(),
         ])
     
-    data_root = "../dataset"
+    data_root = "../data/waste"
     test_data = datasets.ImageFolder(
         root=os.path.join(data_root, "DATASET/TEST"),
         transform=data_transform,
