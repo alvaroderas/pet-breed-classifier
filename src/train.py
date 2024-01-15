@@ -10,8 +10,8 @@ import model_builder, engine, data_setup, utils
 
 from torchvision import transforms
 
-NUM_EPOCHS = 5
-HIDDEN_UNITS = 10
+NUM_EPOCHS = 15
+HIDDEN_UNITS = 32
 LEARNING_RATE = 0.001
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -37,9 +37,10 @@ def main():
                 device=device)
 
 # Optional save
-#utils.save_model(model=model,
-#                 target_dir="models",
-#                 model_name="PetCNN_model")
+utils.save_model(model=model,
+                 target_dir="models",
+                 model_name="trained_model")
+
 if __name__ == '__main__':
     torch.multiprocessing.freeze_support()
     main()
