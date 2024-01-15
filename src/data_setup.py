@@ -14,7 +14,7 @@ from pathlib import Path
 NUM_WORKERS = os.cpu_count()
 BATCH_SIZE = 32
 
-data_root = "../dataset"
+data_root = "../data/waste"
 
 data_path = Path("../data/")
 image_path = data_path / "waste"
@@ -36,7 +36,7 @@ with zipfile.ZipFile(data_path / "archive.zip", "r") as zip_ref:
 
 os.remove(data_path / "archive.zip")
 
-def setup_data(data_root: str="../data/waste",
+def setup_data(data_root: str=data_root,
                batch_size: int=BATCH_SIZE,
                num_workers: int=NUM_WORKERS):
     """
