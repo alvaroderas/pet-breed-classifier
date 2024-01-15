@@ -10,9 +10,9 @@ import model_builder, engine, data_setup, utils
 
 from torchvision import transforms
 
-NUM_EPOCHS = 15
+NUM_EPOCHS = 40
 HIDDEN_UNITS = 32
-LEARNING_RATE = 0.001
+LEARNING_RATE = 0.0003
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
