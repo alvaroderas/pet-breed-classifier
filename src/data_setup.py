@@ -1,14 +1,6 @@
-"""
-Contains functionality for setting up image classifcation data through
-the creation of PyTorch DataLoaders.
-
-Author: Alvaro Deras
-Date: January 13, 2024
-"""
-import os, requests, zipfile
-
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
+import os
+import requests
+import zipfile
 from pathlib import Path
 
 NUM_WORKERS = os.cpu_count()
@@ -25,16 +17,21 @@ else:
     print(f"Did not find {image_path} directory, creating one...")
     image_path.mkdir(parents=True, exist_ok=True)
 
-with open(data_path / "archive.zip", "wb") as f:
-    request = requests.get("https://www.kaggle.com/datasets/techsash/waste-classification-data/download?datasetVersionNumber=1")
-    print("Downloading waste dataset...")
-    f.write(request.content)
+zip_file_path = data_path / "archive.zip"
 
-with zipfile.ZipFile(data_path / "archive.zip", "r") as zip_ref:
-    print("Unzipping waste classification data...") 
-    zip_ref.extractall(image_path)
+if not zip_file_path.is_file():
+    with open(zip_file_path, "wb") as f:
+        request = requests.get("http://dl.dropboxusercontent.com/scl/fi/3q0nbtsk43qixqtsf9j19/archive.zip?rlkey=8b14v0cyj1kyctaebv05yhr7m&dl=0")
+        print("Downloading waste dataset...")
+        f.write(request.content)
 
-os.remove(data_path / "archive.zip")
+    with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+        print("Unzipping waste classification data...")
+        zip_ref.extractall(image_path)
+
+    os.remove(zip_file_path)
+else:
+    print(f"Zip file {zip_file_path} already exists. Skipping download and extraction.")
 
 def setup_data(data_root: str=data_root,
                batch_size: int=BATCH_SIZE,

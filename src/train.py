@@ -37,10 +37,10 @@ def main():
                 epochs=NUM_EPOCHS,
                 device=device)
 
-# Optional save
-utils.save_model(model=model,
-                 target_dir="../models",
-                 model_name=MODEL_NAME)
+    # Optional save
+    utils.save_model(model=model,
+                    target_dir="../models",
+                    model_name=MODEL_NAME)
 
 if __name__ == '__main__':
     torch.multiprocessing.freeze_support()
