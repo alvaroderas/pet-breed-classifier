@@ -13,6 +13,7 @@ from torchvision import transforms
 NUM_EPOCHS = 40
 HIDDEN_UNITS = 32
 LEARNING_RATE = 0.0003
+MODEL_NAME = "trained_model"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -39,7 +40,7 @@ def main():
 # Optional save
 utils.save_model(model=model,
                  target_dir="../models",
-                 model_name="trained_model")
+                 model_name=MODEL_NAME)
 
 if __name__ == '__main__':
     torch.multiprocessing.freeze_support()
