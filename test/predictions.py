@@ -89,7 +89,7 @@ def plot_predictions(model: torch.nn.Module, device: torch.device):
     plt.show()
 
 HIDDEN_UNITS = 32
-MODEL_SAVE_PATH = "models/trained_model"
+MODEL_SAVE_PATH = "../models/trained_model"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 loaded_model = model_builder.WasteClassifier(

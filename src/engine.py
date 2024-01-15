@@ -57,7 +57,7 @@ def train_step(model: torch.nn.Module,
         optimizer.step()
 
         y_pred_class = torch.round(torch.sigmoid(y_logits))
-        train_acc += (y_pred_class == y).sum().item()/len(y_pred)
+        train_acc += (y_pred_class == y).sum().item()/len(y_pred_class)
 
     train_loss = train_loss / len(dataloader)
     train_acc = train_acc / len(dataloader)

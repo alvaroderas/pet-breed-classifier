@@ -38,7 +38,7 @@ def main():
 
 # Optional save
 utils.save_model(model=model,
-                 target_dir="models",
+                 target_dir="../models",
                  model_name="trained_model")
 
 if __name__ == '__main__':
