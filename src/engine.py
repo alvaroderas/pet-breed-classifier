@@ -156,7 +156,7 @@ def train(model: torch.nn.Module,
                                         loss_function=loss_function,
                                         device=device)
         print(
-            f"/nEpoch: {epoch+1} |"
+            f"\nEpoch: {epoch+1} |"
             f"train_loss: {train_loss:.4f} |"
             f"train_acc: {train_acc:.4f} |"
             f"test_loss: {test_loss:.4f} |"
