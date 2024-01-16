@@ -5,7 +5,7 @@ Author: Alvaro Deras
 Date: January 13, 2024
 """
 import os, torch, requests, zipfile
-import model_builder, engine, data_setup
+import model_builder, engine, data_setup, utils
 
 from pathlib import Path
 
@@ -61,7 +61,7 @@ def main():
 
     # Optional save
     utils.save_model(model=model,
-                    target_dir="../models",
+                    target_directory="../models",
                     model_name=MODEL_NAME)
 
 if __name__ == '__main__':
