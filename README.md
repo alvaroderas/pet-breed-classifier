@@ -25,7 +25,7 @@ The Waste Classifier is a deep learning model built for the purpose of waste cla
 
 ## Screenshots
 
-An example of prediction results from a trained model:
+An example of prediction results from a trained model, a 90% accuracy:
 ![Predictions](imgs/wastepredictions90.png)
 
 ## Installation
