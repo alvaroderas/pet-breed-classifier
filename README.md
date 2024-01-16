@@ -5,6 +5,7 @@ A convolutional neural network for waste classification based on whether it is o
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Model Training](#model-training)
