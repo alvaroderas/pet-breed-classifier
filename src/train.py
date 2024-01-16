@@ -1,5 +1,6 @@
 """
-Trains a PyTorch convolutional neural network model to classify images.
+Trains a PyTorch convolutional neural network model to classify waste 
+images.
 
 Author: Alvaro Deras
 Date: January 13, 2024
