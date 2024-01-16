@@ -9,24 +9,18 @@ import model_builder, engine, data_setup
 
 from pathlib import Path
 
-from torchvision import transforms
-
 def main():
-    NUM_WORKERS = os.cpu_count()
-    BATCH_SIZE = 32
 
-    data_root = "../data/waste"
+    DATA_PATH = Path("../data/")
+    IMAGE_PATH = DATA_PATH / "waste"
 
-    data_path = Path("../data/")
-    image_path = data_path / "waste"
-
-    if image_path.is_dir():
-        print(f"{image_path} directory exists. Skipping directory creation.")
+    if IMAGE_PATH.is_dir():
+        print(f"{IMAGE_PATH} directory exists. Skipping directory creation.")
     else:
-        print(f"Did not find {image_path} directory, creating one...")
-        image_path.mkdir(parents=True, exist_ok=True)
+        print(f"Did not find {IMAGE_PATH} directory, creating one...")
+        IMAGE_PATH.mkdir(parents=True, exist_ok=True)
 
-        zip_file_path = data_path/"archive.zip"
+        zip_file_path = DATA_PATH/"archive.zip"
         with open(zip_file_path, "wb") as f:
             request = requests.get("http://dl.dropboxusercontent.com/scl/fi/3q0nbtsk43qixqtsf9j19/archive.zip?rlkey=8b14v0cyj1kyctaebv05yhr7m&dl=0")
             print("Downloading waste dataset...")
@@ -34,7 +28,7 @@ def main():
 
         with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
             print("Unzipping waste classification data...")
-            zip_ref.extractall(image_path)
+            zip_ref.extractall(IMAGE_PATH)
 
         os.remove(zip_file_path)
 
