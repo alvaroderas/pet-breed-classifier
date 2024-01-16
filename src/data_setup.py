@@ -1,7 +1,12 @@
+"""
+Contains functionality for setting up image classifcation data through
+the creation of PyTorch DataLoaders.
+
+Author: Alvaro Deras
+Date: January 13, 2024
+"""
 import os
-import requests
-import zipfile
-from pathlib import Path
+
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
