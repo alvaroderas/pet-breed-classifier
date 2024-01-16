@@ -41,7 +41,7 @@ def main():
     NUM_EPOCHS = 25
     HIDDEN_UNITS = 32
     LEARNING_RATE = 0.0003
-    MODEL_NAME = "trained_model"
+    MODEL_NAME = "trained_model.pth"
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(device)
