@@ -1,6 +1,6 @@
 # Waste Classifier
 
-A convolutional neural network that classifies waste based on whether it is recyclable or not.
+A convolutional neural network that classifies waste based on whether it is recyclable or organic.
 
 ## Table of Contents
 - [About](#about)
